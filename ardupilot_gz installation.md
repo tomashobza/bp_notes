@@ -1,3 +1,7 @@
+---
+tags:
+  - bp
+---
 https://github.com/ArduPilot/ardupilot_gz?tab=readme-ov-file
 ## Install
 
