@@ -15,4 +15,7 @@ ros2 launch ros_gz_sim gz_sim.launch.py gz_args:=empty.sdf
 ```
 
 > [!info] Let's install ROS2 Jammy, since that has the best support for GZ Harmonic https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
+>> ![[Pasted image 20240930113950.png]]
+>> nevermind ...
+
 
