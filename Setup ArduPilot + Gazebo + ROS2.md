@@ -19,3 +19,6 @@ ros2 launch ros_gz_sim gz_sim.launch.py gz_args:=empty.sdf
 >> nevermind ...
 
 
+```bash
+sudo apt install ros-humble-mavros ros-humble-mavros-extras
+```
