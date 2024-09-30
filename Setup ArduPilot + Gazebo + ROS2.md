@@ -36,3 +36,15 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-
 sudo apt-get update
 sudo apt-get install ignition-fortress
 ```
+
+# Install `gz_ros2_control`
+https://github.com/ros-controls/gz_ros2_control
+```bash
+sudo apt install ros-humble-ign-ros2-control
+```
+
+# Install `ardupilot_gazbeo` plugin
+https://github.com/ArduPilot/ardupilot_gazebo
+```bash
+
+```
