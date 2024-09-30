@@ -25,5 +25,3 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 - [[Run Gazebo + ArduPilot STIL with a camera feed]]
 - [[Run DroneKit to control ArduPilot STIL]]
 - [[Read drone camera feed in python]]
-
-test autocommit git in obsidian

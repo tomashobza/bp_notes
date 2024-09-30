@@ -14,4 +14,9 @@ sudo apt-get install ros-${ROS_DISTRO}-ros-gz
 ros2 launch ros_gz_sim gz_sim.launch.py gz_args:=empty.sdf
 ```
 
-huh?
+> [!info] Let's install ROS2 Jammy, since that has the best support for GZ Harmonic
+
+```bash
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+```
