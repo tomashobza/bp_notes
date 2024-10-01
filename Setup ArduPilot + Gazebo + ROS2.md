@@ -52,7 +52,8 @@ Run `rqt` and watch the drone camera feed.
 
 > [!warning] Make sure all terminals are sourced with step no. 5
 
-
+This should be the result:
+![[Pasted image 20240930232756.png]]
 
 ---
 # Pokus
