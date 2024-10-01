@@ -19,3 +19,64 @@ sudo apt-get install libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-pl
 # Setup process
 [[Setup ArduPilot + Gazebo + ROS2]]
 
+# Configuration Architecture
+```puml
+@startuml
+!define RECTANGLE class
+
+skinparam componentStyle uml2
+
+rectangle "Computer" {
+  package "Gazebo" {
+    [Physics Simulation]
+    [Drone Model]
+    [Simulated Sensors]
+    [ArduPilot Plugin]
+    [Camera]
+  }
+
+  package "ArduPilot SITL" {
+    [Autopilot Firmware]
+  }
+
+  package "ROS 2" {
+    [ROS 2 Nodes]
+    [ros_gz_bridge]
+  }
+
+  [MAVProxy]
+  [rqt]
+}
+
+[Physics Simulation] --> [Drone Model] : updates
+[Drone Model] --> [Simulated Sensors] : generates data
+[Simulated Sensors] --> [ArduPilot Plugin] : sends sensor data
+[ArduPilot Plugin] <--> [Autopilot Firmware] : MAVLink
+[Autopilot Firmware] <--> [MAVProxy] : MAVLink
+[ArduPilot Plugin] --> [Drone Model] : applies control outputs
+[Camera] --> [ros_gz_bridge] : Gazebo topic
+[ros_gz_bridge] --> [ROS 2 Nodes] : ROS 2 topic
+[ROS 2 Nodes] --> [rqt] : ROS 2 topic
+
+note right of [ArduPilot Plugin]
+  Bridges between Gazebo
+  and ArduPilot SITL
+end note
+
+note right of [ros_gz_bridge]
+  Translates between Gazebo
+  and ROS 2 topics
+end note
+
+note bottom of [MAVProxy]
+  Sends commands to
+  ArduPilot SITL
+end note
+
+note bottom of [rqt]
+  Displays camera
+  feed and other data
+end note
+
+@enduml
+```
