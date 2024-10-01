@@ -16,4 +16,6 @@ sudo apt-get install libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-pl
 
 > [!warning] It turns out that Gazebo uses some internal transport protocol (I believe similar to ROS), so conventional libraries to read the camera feed don't work. I decided to go via the path of least resistance and use ROS2 with Gazebo and Ardupilot.
 
+# Setup process
 [[Setup ArduPilot + Gazebo + ROS2]]
+
