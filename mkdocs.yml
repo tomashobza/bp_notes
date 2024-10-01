@@ -50,17 +50,9 @@ markdown_extensions:
 plugins:
     - search
     - roamlinks
-    - build_plantuml:
-      render: "server" # or "local" for local rendering
-      bin_path: "/usr/local/bin/plantuml" # ignored when render: server
-      server: "http://www.plantuml.com/plantuml" # official plantuml server
-      disable_ssl_certificate_validation: true # for self-signed and invalid certs
-      output_format: "svg" # or "png"
-      allow_multiple_roots: false # in case your codebase contains more locations for diagrams (all ending in diagram_root)
-      diagram_root: "docs/diagrams" # should reside under docs_dir
-      output_folder: "out"
-      input_folder: "src"
-      input_extensions: "" # comma separated list of extensions to parse, by default every file is parsed
+    - plantuml:
+          puml_url: https://www.plantuml.com/plantuml/
+          num_workers: 8
     # - blog
     # - rss:
     #     match_path: blog/posts/.*
