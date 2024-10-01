@@ -10,7 +10,16 @@ mkdir -p ~/ardu_ws/src
 cd ~/ardu_ws
 vcs import --recursive --input  https://raw.githubusercontent.com/ArduPilot/ardupilot/master/Tools/ros2/ros2.repos src
 ```
+2. Update all dependencies
+```bash
+cd ~/ardu_ws
+sudo apt update
+rosdep update
+source /opt/ros/humble/setup.bash
+rosdep install --from-paths src --ignore-src
+```
 
+## Install ROS2 + ArduPilot + Gazebo
 
 3. Clone the required repos
 ```bash
