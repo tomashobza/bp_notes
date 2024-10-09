@@ -32,3 +32,5 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 
  >https://cloud.sdsc.edu/v1/AUTH_opentopography/www/shortcourses/18SGTF/2_nissen-GSA-sept-2016-SfM-lecture1-Intro-Motivations-FINAL.pdf 
 
+> SIFT (Scale Invariant Feature Transform) - Robustní algoritmus pro extrakci rysů, který umožňuje nalézt shodné body i v obrazech s odlišným měřítkem, úhlem pohledu nebo osvětlením.
+> https://www.youtube.com/watch?v=ram-jbLJjFg
