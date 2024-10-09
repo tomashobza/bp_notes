@@ -80,3 +80,5 @@ end note
 
 @enduml
 ```
+
+# [[Following the official ROS2 + ArduPilot + Gazebo tutorial]]
