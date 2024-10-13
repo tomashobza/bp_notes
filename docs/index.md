@@ -49,5 +49,5 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 > BARTAK, Roman; VYKOVSKÝ, Adam. Any object tracking and following by a flying drone. In: _2015 Fourteenth Mexican International Conference on Artificial Intelligence (MICAI)_. IEEE, 2015. p. 35-41.
 > https://ieeexplore.ieee.org/abstract/document/7429411
 
-> DUNG, Nguyen Dinh; ROHACS, Jozsef. The drone-following models in smart cities. In: _2018 IEEE 59th international scientific conference on power and electrical engineering of Riga Technical University (RTUCON)_. IEEE, 2018. p. 1-6.
-> https://ieeexplore.ieee.org/abstract/document/8659813
+> CHEN, Peng, et al. Real-time object tracking on a drone with multi-inertial sensing data. _IEEE Transactions on Intelligent Transportation Systems_, 2017, 19.1: 131-139.
+> https://ieeexplore.ieee.org/abstract/document/8054712?casa_token=wrAGgarM5eEAAAAA:Mb196vV6l43fToiv5K9Cp7rdePAXtO2qa3-GSRadu_rDmKBCmJpxIeF3Scx3PLOP2VI9TBqnOgg
