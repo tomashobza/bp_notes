@@ -44,3 +44,4 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 
 ![[Pasted image 20241013122718.png]]
 ![[Pasted image 20241013122725.png]]
+asd
