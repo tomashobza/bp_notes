@@ -36,5 +36,6 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 > https://www.youtube.com/watch?v=ram-jbLJjFg
 > https://weitz.de/sift/
 
-> Structure-From-Motion Videa
+> Structure-From-Motion
 > https://youtu.be/JlOzyyhk1v0?si=kY-hb6UncmXVEBmB
+> https://link.springer.com/content/pdf/10.1007/BFb0014857.pdf - orthografické structure from motion
