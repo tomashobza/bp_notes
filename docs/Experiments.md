@@ -14,3 +14,7 @@ A následně jsem vyzkoušel extrakci a párování charakteristických bodů. O
 ![[Pasted image 20241013203207.png]]
 ![[Pasted image 20241013203223.png]]
 ![[Pasted image 20241013203227.png]]
+Zde vizualizováno znovu se snímky z videa z dronu:
+![[Pasted image 20241013212336.png]]
+![[Pasted image 20241013212338.png]]
+![[Pasted image 20241013212341.png]]
