@@ -26,6 +26,8 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 - [[Run DroneKit to control ArduPilot STIL]]
 - [[Read drone camera feed in python]]
 
+## [[Experiments]]
+
 # Research
 > SCHONBERGER, Johannes L.; FRAHM, Jan-Michael. Structure-from-motion revisited. In: _Proceedings of the IEEE conference on computer vision and pattern recognition_. 2016. p. 4104-4113.
 > [https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Schonberger_Structure-From-Motion_Revisited_CVPR_2016_paper.pdf](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Schonberger_Structure-From-Motion_Revisited_CVPR_2016_paper.pdf)
@@ -42,9 +44,6 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 > https://link.springer.com/content/pdf/10.1007/BFb0014857.pdf - orthografické structure from motion
 > TOMASI, Carlo; KANADE, Takeo. Shape and motion from image streams: a factorization method. _Proceedings of the National Academy of Sciences_, 1993, 90.21: 9795-9802.
 > https://www.pnas.org/doi/epdf/10.1073/pnas.90.21.9795
-
-![[Pasted image 20241013122718.png]]
-![[Pasted image 20241013122725.png]]
 ## Drone following
 > BARTAK, Roman; VYKOVSKÝ, Adam. Any object tracking and following by a flying drone. In: _2015 Fourteenth Mexican International Conference on Artificial Intelligence (MICAI)_. IEEE, 2015. p. 35-41.
 > https://ieeexplore.ieee.org/abstract/document/7429411
