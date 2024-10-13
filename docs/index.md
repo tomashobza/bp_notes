@@ -41,3 +41,6 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 > https://link.springer.com/content/pdf/10.1007/BFb0014857.pdf - orthografické structure from motion
 > TOMASI, Carlo; KANADE, Takeo. Shape and motion from image streams: a factorization method. _Proceedings of the National Academy of Sciences_, 1993, 90.21: 9795-9802.
 > https://www.pnas.org/doi/epdf/10.1073/pnas.90.21.9795
+
+![[Pasted image 20241013122718.png]]
+![[Pasted image 20241013122725.png]]
