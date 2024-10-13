@@ -45,4 +45,9 @@ This guide is appliable for a fresh install of Ubuntu 22.04 arm64. Gotten from: 
 
 ![[Pasted image 20241013122718.png]]
 ![[Pasted image 20241013122725.png]]
-asd
+## Drone following
+> BARTAK, Roman; VYKOVSKÝ, Adam. Any object tracking and following by a flying drone. In: _2015 Fourteenth Mexican International Conference on Artificial Intelligence (MICAI)_. IEEE, 2015. p. 35-41.
+> https://ieeexplore.ieee.org/abstract/document/7429411
+
+> DUNG, Nguyen Dinh; ROHACS, Jozsef. The drone-following models in smart cities. In: _2018 IEEE 59th international scientific conference on power and electrical engineering of Riga Technical University (RTUCON)_. IEEE, 2018. p. 1-6.
+> https://ieeexplore.ieee.org/abstract/document/8659813
