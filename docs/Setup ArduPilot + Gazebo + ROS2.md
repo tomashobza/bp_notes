@@ -5,13 +5,18 @@ tags:
 
 
 Let's go through the setup process to ensure you have all the necessary packages:
-1. First, make sure you're in your ROS2 workspace:
+0. Create a ROS2 workspace:
+```bash
+source /opt/ros/humble/setup.bash
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+```
+2. First, make sure you're in your ROS2 workspace:
 ```bash
 cd ~/ros2_ws
 ```
 2. Clone the required repositories:
 ```bash
-mkdir -p src
 cd src
 git clone https://github.com/ArduPilot/ardupilot_gazebo.git
 git clone https://github.com/ArduPilot/ardupilot_gz.git
