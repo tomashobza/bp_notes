@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/Read drone camera feed in python.md",
+                "file": "docs/Setup ArduPilot + Gazebo + ROS2.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,14 +25,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Following the official ROS2 + ArduPilot + Gazebo tutorial.md",
+                "file": "docs/Run DroneKit to control ArduPilot STIL.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Following the official ROS2 + ArduPilot + Gazebo tutorial.md",
+                "file": "docs/Setup ArduPilot + Gazebo + ROS2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Following the official ROS2 + ArduPilot + Gazebo tutorial.md",
+                "file": "docs/Setup ArduPilot + Gazebo + ROS2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Following the official ROS2 + ArduPilot + Gazebo tutorial.md"
+                "file": "docs/Setup ArduPilot + Gazebo + ROS2.md"
               }
             }
           },
@@ -168,11 +167,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ad42d498a98dbb73",
+  "active": "c4d2cb99ed542553",
   "lastOpenFiles": [
     "docs/Read drone camera feed in python.md",
-    "Following the official ROS2 + ArduPilot + Gazebo tutorial.md",
     "docs/index.md",
+    "docs/Following the official ROS2 + ArduPilot + Gazebo tutorial.md",
+    "docs/Run DroneKit to control ArduPilot STIL.md",
     "Setup ArduPilot + Gazebo + ROS2.md",
     "docs/assets/Snímek obrazovky 2024-09-23 v 13.16.13.png",
     "docs/assets/Pasted image 20240930102806.png",
@@ -190,7 +190,6 @@
     "docs/Setup ROS2 environment and micro-ROS.md",
     "docs/Setup ArduPilot + Gazebo + ROS2.md",
     "docs/Run Gazebo + ArduPilot STIL with a camera feed.md",
-    "docs/Run DroneKit to control ArduPilot STIL.md",
     "docs/ROS2 Humble installation.md",
     "docs/Installing ROS 2 and the micro-ROS build system.md",
     "docs/Gazebo Harmonic installation.md",
