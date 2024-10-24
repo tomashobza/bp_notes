@@ -4,28 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "16f4908bdc947003",
+        "id": "db996c3d184ff553",
         "type": "tabs",
         "children": [
           {
-            "id": "c4d2cb99ed542553",
+            "id": "4fd26e63379eb467",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "docs/Setup ArduPilot + Gazebo + ROS2.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ad42d498a98dbb73",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/Run DroneKit to control ArduPilot STIL.md",
                 "mode": "source",
                 "source": false
               }
@@ -167,36 +155,35 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2a9b8231657b4957",
+  "active": "4fd26e63379eb467",
   "lastOpenFiles": [
-    "docs/assets/Pasted image 20241013212341.png",
-    "docs/assets/Pasted image 20241013212338.png",
-    "docs/assets/Pasted image 20241013212336.png",
-    "docs/assets/Pasted image 20241013203227.png",
-    "docs/assets/Pasted image 20241013203223.png",
-    "docs/assets/Pasted image 20241013203219.png",
-    "docs/assets/Pasted image 20241013203207.png",
-    "docs/assets/Pasted image 20241013203156.png",
-    "docs/assets/Pasted image 20241013203137.png",
-    "docs/assets/Pasted image 20241013203132.png",
-    "docs/assets/Pasted image 20241013122725.png",
-    "docs/Experiments.md",
-    "docs/Read drone camera feed in python.md",
-    "docs/index.md",
-    "docs/Following the official ROS2 + ArduPilot + Gazebo tutorial.md",
+    "docs/Run Gazebo + ArduPilot STIL with a camera feed.md",
+    "docs/Installing ROS 2 and the micro-ROS build system.md",
     "docs/Run DroneKit to control ArduPilot STIL.md",
+    "docs/assets/Pasted image 20240923150857.png",
+    "docs/assets/Pasted image 20240923172927.png",
+    "docs/assets/Pasted image 20240923174419.png",
+    "docs/assets/Pasted image 20240930102806.png",
+    "docs/assets/Pasted image 20241013122718.png",
+    "docs/assets/Pasted image 20241013122725.png",
+    "docs/assets/Pasted image 20241013212341.png",
+    "docs/assets/Snímek obrazovky 2024-09-23 v 13.16.13.png",
+    "docs/assets/Pasted image 20241013203227.png",
+    "docs/assets/Pasted image 20241013203219.png",
+    "docs/AdruPilot installation.md",
+    "docs/Read drone camera feed in python.md",
+    "docs/ROS2 Humble installation.md",
+    "docs/Setup ArduPilot + Gazebo + ROS2.md",
+    "docs/Setup ROS2 environment and micro-ROS.md",
+    "docs/Using SITL with gazebo.md",
+    "docs/Following the official ROS2 + ArduPilot + Gazebo tutorial.md",
+    "docs/Gazebo Harmonic installation.md",
+    "docs/Experiments.md",
+    "docs/index.md",
     "Setup ArduPilot + Gazebo + ROS2.md",
     "docs/assets",
     "docs/ardupilot_gz installation.md",
-    "docs/Using SITL with gazebo.md",
-    "docs/Setup ROS2 environment and micro-ROS.md",
-    "docs/Setup ArduPilot + Gazebo + ROS2.md",
-    "docs/Run Gazebo + ArduPilot STIL with a camera feed.md",
-    "docs/ROS2 Humble installation.md",
-    "docs/Installing ROS 2 and the micro-ROS build system.md",
-    "docs/Gazebo Harmonic installation.md",
     "docs/DroneKit installation.md",
-    "docs/AdruPilot installation.md",
     "docs",
     "mkdocs.yml",
     "Read drone camera feed in python.md",
