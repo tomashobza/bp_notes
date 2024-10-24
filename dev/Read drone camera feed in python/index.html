@@ -1,0 +1,735 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ROS2%20Humble%20installation/">
+      
+      
+        <link rel="next" href="../Run%20DroneKit%20to%20control%20ArduPilot%20STIL/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Read drone camera feed in python - obsidian-mkdocs template</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/mkdocs_puml/puml.css">
+    
+      <link rel="stylesheet" href="../../assets/mkdocs_puml/interaction.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setup-process" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="obsidian-mkdocs template" class="md-header__button md-logo" aria-label="obsidian-mkdocs template" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            obsidian-mkdocs template
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Read drone camera feed in python
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="obsidian-mkdocs template" class="md-nav__button md-logo" aria-label="obsidian-mkdocs template" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    obsidian-mkdocs template
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Setting%20up%20ArduPilot%20with%20ROS%202%20and%20Gazebo%20-%20Tutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setting up ArduPilot with ROS 2 and Gazebo   Tutorial
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dev
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Dev
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AdruPilot%20installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AdruPilot installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DroneKit%20installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DroneKit installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Experiments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Experiments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Following%20the%20official%20ROS2%20%2B%20ArduPilot%20%2B%20Gazebo%20tutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Following the official ROS2 + ArduPilot + Gazebo tutorial
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gazebo%20Harmonic%20installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gazebo Harmonic installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Installing%20ROS%202%20and%20the%20micro-ROS%20build%20system/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installing ROS 2 and the micro ROS build system
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ROS2%20Humble%20installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ROS2 Humble installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Read drone camera feed in python
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Run%20DroneKit%20to%20control%20ArduPilot%20STIL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Run DroneKit to control ArduPilot STIL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Run%20Gazebo%20%2B%20ArduPilot%20STIL%20with%20a%20camera%20feed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Run Gazebo + ArduPilot STIL with a camera feed
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Setup%20ArduPilot%20%2B%20Gazebo%20%2B%20ROS2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup ArduPilot + Gazebo + ROS2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Setup%20ROS2%20environment%20and%20micro-ROS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup ROS2 environment and micro ROS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Using%20SITL%20with%20gazebo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using SITL with gazebo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ardupilot_gz%20installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ardupilot gz installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>opencv-python
+pip<span class="w"> </span>install<span class="w"> </span>numpy
+pip<span class="w"> </span>install<span class="w"> </span>dronekit
+pip<span class="w"> </span>install<span class="w"> </span>pymavlink
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libgstreamer1.0-0<span class="w"> </span>gstreamer1.0-plugins-base<span class="w"> </span>gstreamer1.0-plugins-good<span class="w"> </span>gstreamer1.0-plugins-bad<span class="w"> </span>gstreamer1.0-plugins-ugly<span class="w"> </span>gstreamer1.0-libav<span class="w"> </span>gstreamer1.0-doc<span class="w"> </span>gstreamer1.0-tools<span class="w"> </span>gstreamer1.0-x<span class="w"> </span>gstreamer1.0-alsa<span class="w"> </span>gstreamer1.0-gl<span class="w"> </span>gstreamer1.0-gtk3<span class="w"> </span>gstreamer1.0-qt5<span class="w"> </span>gstreamer1.0-pulseaudio
+</code></pre></div>
+<blockquote>
+<p>[!warning] It turns out that Gazebo uses some internal transport protocol (I believe similar to ROS), so conventional libraries to read the camera feed don't work. I decided to go via the path of least resistance and use ROS2 with Gazebo and Ardupilot.</p>
+</blockquote>
+<h1 id="setup-process">Setup process<a class="headerlink" href="#setup-process" title="Permanent link">&para;</a></h1>
+<p><a href="../Setup%20ArduPilot%20%2B%20Gazebo%20%2B%20ROS2/">Setup ArduPilot + Gazebo + ROS2</a></p>
+<h1 id="configuration-architecture">Configuration Architecture<a class="headerlink" href="#configuration-architecture" title="Permanent link">&para;</a></h1>
+<div class='puml-container'><div class="puml light" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="699px" preserveAspectRatio="xMidYMid meet" style="width:1220px;height:699px;background:#FFFFFF;" version="1.1" viewBox="0 0 1220 699" width="1220px" zoomAndPan="magnify" class="diagram"><defs/><g><g id="cluster_Computer"><rect fill="none" height="535.18" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="988" x="7" y="69.87"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="77.5605" x="462.2197" y="84.8651">Computer</text></g><g id="cluster_Gazebo"><path d="M33.5,112.87 L92.7217,112.87 A3.75,3.75 0 0 1 95.2217,115.37 L102.2217,135.1669 L546.5,135.1669 A2.5,2.5 0 0 1 549,137.6669 L549,477.26 A2.5,2.5 0 0 1 546.5,479.76 L33.5,479.76 A2.5,2.5 0 0 1 31,477.26 L31,115.37 A2.5,2.5 0 0 1 33.5,112.87 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="31" x2="102.2217" y1="135.1669" y2="135.1669"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="58.2217" x="35" y="127.8651">Gazebo</text></g><g id="cluster_ArduPilot SITL"><path d="M767.5,257.16 L881.0332,257.16 A3.75,3.75 0 0 1 883.5332,259.66 L890.5332,279.4569 L968.5,279.4569 A2.5,2.5 0 0 1 971,281.9569 L971,351.96 A2.5,2.5 0 0 1 968.5,354.46 L767.5,354.46 A2.5,2.5 0 0 1 765,351.96 L765,259.66 A2.5,2.5 0 0 1 767.5,257.16 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="765" x2="890.5332" y1="279.4569" y2="279.4569"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="112.5332" x="769" y="272.1551">ArduPilot SITL</text></g><g id="cluster_ROS 2"><path d="M575.5,257.16 L623.8799,257.16 A3.75,3.75 0 0 1 626.3799,259.66 L633.3799,279.4569 L738.5,279.4569 A2.5,2.5 0 0 1 741,281.9569 L741,477.26 A2.5,2.5 0 0 1 738.5,479.76 L575.5,479.76 A2.5,2.5 0 0 1 573,477.26 L573,259.66 A2.5,2.5 0 0 1 575.5,257.16 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="573" x2="633.3799" y1="279.4569" y2="279.4569"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="47.3799" x="577" y="272.1551">ROS 2</text></g><g id="elem_MAVProxy"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="110.5674" x="840.72" y="417.46"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="931.2874" y="422.46"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="929.2874" y="424.46"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="929.2874" y="428.46"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70.5674" x="855.72" y="450.4551">MAVProxy</text></g><g id="elem_rqt"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="60.1318" x="624.93" y="542.76"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="665.0618" y="547.76"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="663.0618" y="549.76"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="663.0618" y="553.76"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="20.1318" x="639.93" y="575.7551">rqt</text></g><g id="elem_Physics Simulation"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="170.7988" x="46.6" y="147.87"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="197.3988" y="152.87"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="195.3988" y="154.87"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="195.3988" y="158.87"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.7988" x="61.6" y="180.8651">Physics Simulation</text></g><g id="elem_Drone Model"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="129.0723" x="161.46" y="292.16"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="270.5323" y="297.16"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="268.5323" y="299.16"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="268.5323" y="303.16"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89.0723" x="176.46" y="325.1551">Drone Model</text></g><g id="elem_Simulated Sensors"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="170.4775" x="243.76" y="417.46"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="394.2375" y="422.46"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="392.2375" y="424.46"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="392.2375" y="428.46"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.4775" x="258.76" y="450.4551">Simulated Sensors</text></g><g id="elem_ArduPilot Plugin"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="150.6738" x="252.66" y="147.87"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="383.3338" y="152.87"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="381.3338" y="154.87"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="381.3338" y="158.87"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110.6738" x="267.66" y="180.8651">ArduPilot Plugin</text></g><g id="elem_Camera"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="94.9404" x="438.53" y="147.87"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="513.4704" y="152.87"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="511.4704" y="154.87"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="511.4704" y="158.87"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54.9404" x="453.53" y="180.8651">Camera</text></g><g id="elem_Autopilot Firmware"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="173.4102" x="781.29" y="292.16"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="934.7002" y="297.16"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="932.7002" y="299.16"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="932.7002" y="303.16"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133.4102" x="796.29" y="325.1551">Autopilot Firmware</text></g><g id="elem_ROS 2 Nodes"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="131.2734" x="589.36" y="417.46"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="700.6334" y="422.46"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="698.6334" y="424.46"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="698.6334" y="428.46"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91.2734" x="604.36" y="450.4551">ROS 2 Nodes</text></g><g id="elem_ros_gz_bridge"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="136.7695" x="588.62" y="292.16"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="705.3895" y="297.16"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="703.3895" y="299.16"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="703.3895" y="303.16"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96.7695" x="603.62" y="325.1551">ros_gz_bridge</text></g><g id="elem_GMN25"><path d="M1011.15,150.88 L1011.15,191.1456 L1194.8468,191.1456 L1194.8468,160.88 L1184.8468,150.88 L1011.15,150.88 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M1184.8468,150.88 L1184.8468,160.88 L1194.8468,160.88 L1184.8468,150.88 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="162.6968" x="1017.15" y="167.9469">Bridges between Gazebo</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118.8345" x="1017.15" y="183.0797">and ArduPilot SITL</text></g><g id="elem_GMN28"><path d="M1010.87,295.18 L1010.87,335.4456 L1213.1273,335.4456 L1213.1273,305.18 L1203.1273,295.18 L1010.87,295.18 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M1203.1273,295.18 L1203.1273,305.18 L1213.1273,305.18 L1203.1273,295.18 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="181.2573" x="1016.87" y="312.2469">Translates between Gazebo</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="111.4775" x="1016.87" y="327.3797">and ROS 2 topics</text></g><g id="elem_GMN31"><path d="M1011.26,545.77 L1011.26,586.0356 A0,0 0 0 0 1011.26,586.0356 L1164.7483,586.0356 A0,0 0 0 0 1164.7483,586.0356 L1164.7483,555.77 L1154.7483,545.77 L1061.44,545.77 L931.22,464.22 L1053.44,545.77 L1011.26,545.77 A0,0 0 0 0 1011.26,545.77 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M1154.7483,545.77 L1154.7483,555.77 L1164.7483,555.77 L1154.7483,545.77 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="132.4883" x="1017.26" y="562.8369">Sends commands to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="90.2446" x="1017.26" y="577.9697">ArduPilot SITL</text></g><g id="elem_GMN34"><path d="M579.7,652.05 L579.7,692.3156 A0,0 0 0 0 579.7,692.3156 L730.2938,692.3156 A0,0 0 0 0 730.2938,692.3156 L730.2938,662.05 L720.2938,652.05 L659,652.05 L655,589.53 L651,652.05 L579.7,652.05 A0,0 0 0 0 579.7,652.05 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M720.2938,652.05 L720.2938,662.05 L730.2938,662.05 L720.2938,652.05 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="107.9102" x="585.7" y="669.1169">Displays camera</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="129.5938" x="585.7" y="684.2497">feed and other data</text></g><g id="link_Physics Simulation_Drone Model"><path d="M125.65,194.66 C122.96,208.75 121.87,226.86 129,241.16 C139.77,262.78 155.2164,276.519 174.6364,288.609 " fill="none" id="Physics Simulation-to-Drone Model" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="179.73,291.78,174.2036,283.6277,175.4853,289.1375,169.9756,290.4192,179.73,291.78" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52.5776" x="130" y="237.2269">updates</text></g><g id="link_Drone Model_Simulated Sensors"><path d="M238.92,338.75 C247.72,353.25 260.09,372.21 273,387.46 C281.84,397.91 288.178,404.3676 297.918,413.1676 " fill="none" id="Drone Model-to-Simulated Sensors" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="302.37,417.19,298.3735,408.1884,298.66,413.838,293.0104,414.1245,302.37,417.19" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="99.0806" x="274" y="383.5269">generates data</text></g><g id="link_Simulated Sensors_ArduPilot Plugin"><path d="M357.09,417.21 C365.45,408.86 373.56,398.66 378,387.46 C404.73,319.98 405.07,291.5 378,224.16 C373.51,212.99 369.638,207.077 361.198,198.777 " fill="none" id="Simulated Sensors-to-ArduPilot Plugin" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="356.92,194.57,360.5323,203.7325,360.485,198.0758,366.1416,198.0285,356.92,194.57" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118.6631" x="399" y="319.8769">sends sensor data</text></g><g id="link_ArduPilot Plugin_Autopilot Firmware"><path d="M374.7679,197.2105 C407.1079,213.5105 448.38,231.61 492,241.16 C546.08,253.01 687.4,235.3 741,249.16 C774.71,257.88 804.5578,273.509 829.2478,288.679 " fill="none" id="ArduPilot Plugin-Autopilot Firmware" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="369.41,194.51,375.6465,202.1327,373.8749,196.7604,379.2472,194.9888,369.41,194.51" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="834.36,291.82,828.7858,283.7004,830.0999,289.2025,824.5978,290.5166,834.36,291.82" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55.6245" x="493" y="237.2269">MAVLink</text></g><g id="link_Autopilot Firmware_MAVProxy"><path d="M874.4686,344.7811 C879.5186,367.0211 884.5316,389.0889 889.5716,411.2889 " fill="none" id="Autopilot Firmware-MAVProxy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="873.14,338.93,871.2322,348.5923,874.2472,343.8059,879.0336,346.8209,873.14,338.93" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="890.9,417.14,892.8082,407.4778,889.793,412.2641,885.0067,409.2489,890.9,417.14" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55.6245" x="884" y="383.5269">MAVLink</text></g><g id="link_ArduPilot Plugin_Drone Model"><path d="M255.48,194.65 C242.57,202 230.77,211.62 223,224.16 C210.46,244.39 212.4176,266.5584 217.2576,285.9584 " fill="none" id="ArduPilot Plugin-to-Drone Model" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="218.71,291.78,220.4125,282.0794,217.4997,286.9287,212.6504,284.0159,218.71,291.78" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="149.7285" x="224" y="237.2269">applies control outputs</text></g><g id="link_Camera_ros_gz_bridge"><path d="M517.97,194.46 C530.37,203.43 544.55,214.02 557,224.16 C584,246.16 609.0743,268.9847 628.9743,287.6547 " fill="none" id="Camera-to-ros_gz_bridge" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="633.35,291.76,629.5233,282.685,629.7036,288.339,624.0496,288.5193,633.35,291.76" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85.2617" x="577" y="237.2269">Gazebo topic</text></g><g id="link_ros_gz_bridge_ROS 2 Nodes"><path d="M609.41,338.78 C597.3,346.95 585.8,357.46 579,370.46 C569.24,389.11 579.5247,402.1079 598.9447,414.0979 " fill="none" id="ros_gz_bridge-to-ROS 2 Nodes" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="604.05,417.25,598.4934,409.1183,599.7955,414.6233,594.2906,415.9255,604.05,417.25" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76.1147" x="580" y="383.5269">ROS 2 topic</text></g><g id="link_ROS 2 Nodes_rqt"><path d="M655,464.22 C655,486.47 655,514.24 655,536.43 " fill="none" id="ROS 2 Nodes-to-rqt" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="655,542.43,659,533.43,655,537.43,651,533.43,655,542.43" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76.1147" x="656" y="508.8269">ROS 2 topic</text></g><g id="link_ArduPilot Plugin_GMN25"><path d="M339.67,147.38 C356.5,116.56 390.87,64.49 438.5,46.87 C548.98,6 894.82,105.57 1038.94,150.45 " fill="none" id="ArduPilot Plugin-GMN25" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><g id="link_ros_gz_bridge_GMN28"><path d="M678.86,291.89 C702.03,268.94 740.96,235.45 782.5,221.66 C854.63,197.72 880.19,201.62 953.5,221.66 C1005.3,235.82 1057.37,271.73 1087.05,294.74 " fill="none" id="ros_gz_bridge-GMN28" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g></g></svg></div><div class="puml dark" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="699px" preserveAspectRatio="xMidYMid meet" style="width:1220px;height:699px;background:#1B1B1B;" version="1.1" viewBox="0 0 1220 699" width="1220px" zoomAndPan="magnify" class="diagram"><defs/><g><rect fill="#1B1B1B" height="699" style="stroke:none;stroke-width:1.0;" width="1220" x="0" y="0"/><g id="cluster_Computer"><rect fill="none" height="535.18" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:1.0;" width="988" x="7" y="69.87"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="77.5605" x="462.2197" y="84.8651">Computer</text></g><g id="cluster_Gazebo"><path d="M33.5,112.87 L92.7217,112.87 A3.75,3.75 0 0 1 95.2217,115.37 L102.2217,135.1669 L546.5,135.1669 A2.5,2.5 0 0 1 549,137.6669 L549,477.26 A2.5,2.5 0 0 1 546.5,479.76 L33.5,479.76 A2.5,2.5 0 0 1 31,477.26 L31,115.37 A2.5,2.5 0 0 1 33.5,112.87 " fill="none" style="stroke:#FFFFFF;stroke-width:1.5;"/><line style="stroke:#FFFFFF;stroke-width:1.5;" x1="31" x2="102.2217" y1="135.1669" y2="135.1669"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="58.2217" x="35" y="127.8651">Gazebo</text></g><g id="cluster_ArduPilot SITL"><path d="M767.5,257.16 L881.0332,257.16 A3.75,3.75 0 0 1 883.5332,259.66 L890.5332,279.4569 L968.5,279.4569 A2.5,2.5 0 0 1 971,281.9569 L971,351.96 A2.5,2.5 0 0 1 968.5,354.46 L767.5,354.46 A2.5,2.5 0 0 1 765,351.96 L765,259.66 A2.5,2.5 0 0 1 767.5,257.16 " fill="none" style="stroke:#FFFFFF;stroke-width:1.5;"/><line style="stroke:#FFFFFF;stroke-width:1.5;" x1="765" x2="890.5332" y1="279.4569" y2="279.4569"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="112.5332" x="769" y="272.1551">ArduPilot SITL</text></g><g id="cluster_ROS 2"><path d="M575.5,257.16 L623.8799,257.16 A3.75,3.75 0 0 1 626.3799,259.66 L633.3799,279.4569 L738.5,279.4569 A2.5,2.5 0 0 1 741,281.9569 L741,477.26 A2.5,2.5 0 0 1 738.5,479.76 L575.5,479.76 A2.5,2.5 0 0 1 573,477.26 L573,259.66 A2.5,2.5 0 0 1 575.5,257.16 " fill="none" style="stroke:#FFFFFF;stroke-width:1.5;"/><line style="stroke:#FFFFFF;stroke-width:1.5;" x1="573" x2="633.3799" y1="279.4569" y2="279.4569"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="47.3799" x="577" y="272.1551">ROS 2</text></g><g id="elem_MAVProxy"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="110.5674" x="840.72" y="417.46"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="931.2874" y="422.46"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="929.2874" y="424.46"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="929.2874" y="428.46"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70.5674" x="855.72" y="450.4551">MAVProxy</text></g><g id="elem_rqt"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="60.1318" x="624.93" y="542.76"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="665.0618" y="547.76"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="663.0618" y="549.76"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="663.0618" y="553.76"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="20.1318" x="639.93" y="575.7551">rqt</text></g><g id="elem_Physics Simulation"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="170.7988" x="46.6" y="147.87"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="197.3988" y="152.87"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="195.3988" y="154.87"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="195.3988" y="158.87"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.7988" x="61.6" y="180.8651">Physics Simulation</text></g><g id="elem_Drone Model"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="129.0723" x="161.46" y="292.16"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="270.5323" y="297.16"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="268.5323" y="299.16"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="268.5323" y="303.16"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89.0723" x="176.46" y="325.1551">Drone Model</text></g><g id="elem_Simulated Sensors"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="170.4775" x="243.76" y="417.46"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="394.2375" y="422.46"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="392.2375" y="424.46"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="392.2375" y="428.46"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.4775" x="258.76" y="450.4551">Simulated Sensors</text></g><g id="elem_ArduPilot Plugin"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="150.6738" x="252.66" y="147.87"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="383.3338" y="152.87"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="381.3338" y="154.87"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="381.3338" y="158.87"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110.6738" x="267.66" y="180.8651">ArduPilot Plugin</text></g><g id="elem_Camera"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="94.9404" x="438.53" y="147.87"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="513.4704" y="152.87"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="511.4704" y="154.87"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="511.4704" y="158.87"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54.9404" x="453.53" y="180.8651">Camera</text></g><g id="elem_Autopilot Firmware"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="173.4102" x="781.29" y="292.16"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="934.7002" y="297.16"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="932.7002" y="299.16"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="932.7002" y="303.16"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133.4102" x="796.29" y="325.1551">Autopilot Firmware</text></g><g id="elem_ROS 2 Nodes"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="131.2734" x="589.36" y="417.46"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="700.6334" y="422.46"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="698.6334" y="424.46"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="698.6334" y="428.46"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91.2734" x="604.36" y="450.4551">ROS 2 Nodes</text></g><g id="elem_ros_gz_bridge"><rect fill="#313139" height="46.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="136.7695" x="588.62" y="292.16"/><rect fill="#313139" height="10" style="stroke:#E7E7E7;stroke-width:0.5;" width="15" x="705.3895" y="297.16"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="703.3895" y="299.16"/><rect fill="#313139" height="2" style="stroke:#E7E7E7;stroke-width:0.5;" width="4" x="703.3895" y="303.16"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96.7695" x="603.62" y="325.1551">ros_gz_bridge</text></g><g id="elem_GMN25"><path d="M1011.15,150.88 L1011.15,191.1456 L1194.8468,191.1456 L1194.8468,160.88 L1184.8468,150.88 L1011.15,150.88 " fill="#714137" style="stroke:#E7E7E7;stroke-width:0.5;"/><path d="M1184.8468,150.88 L1184.8468,160.88 L1194.8468,160.88 L1184.8468,150.88 " fill="#714137" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="162.6968" x="1017.15" y="167.9469">Bridges between Gazebo</text><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118.8345" x="1017.15" y="183.0797">and ArduPilot SITL</text></g><g id="elem_GMN28"><path d="M1010.87,295.18 L1010.87,335.4456 L1213.1273,335.4456 L1213.1273,305.18 L1203.1273,295.18 L1010.87,295.18 " fill="#714137" style="stroke:#E7E7E7;stroke-width:0.5;"/><path d="M1203.1273,295.18 L1203.1273,305.18 L1213.1273,305.18 L1203.1273,295.18 " fill="#714137" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="181.2573" x="1016.87" y="312.2469">Translates between Gazebo</text><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="111.4775" x="1016.87" y="327.3797">and ROS 2 topics</text></g><g id="elem_GMN31"><path d="M1011.26,545.77 L1011.26,586.0356 A0,0 0 0 0 1011.26,586.0356 L1164.7483,586.0356 A0,0 0 0 0 1164.7483,586.0356 L1164.7483,555.77 L1154.7483,545.77 L1061.44,545.77 L931.22,464.22 L1053.44,545.77 L1011.26,545.77 A0,0 0 0 0 1011.26,545.77 " fill="#714137" style="stroke:#E7E7E7;stroke-width:0.5;"/><path d="M1154.7483,545.77 L1154.7483,555.77 L1164.7483,555.77 L1154.7483,545.77 " fill="#714137" style="stroke:#E7E7E7;stroke-width:0.5;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="132.4883" x="1017.26" y="562.8369">Sends commands to</text><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="90.2446" x="1017.26" y="577.9697">ArduPilot SITL</text></g><g id="elem_GMN34"><path d="M579.7,652.05 L579.7,692.3156 A0,0 0 0 0 579.7,692.3156 L730.2938,692.3156 A0,0 0 0 0 730.2938,692.3156 L730.2938,662.05 L720.2938,652.05 L659,652.05 L655,589.53 L651,652.05 L579.7,652.05 A0,0 0 0 0 579.7,652.05 " fill="#714137" style="stroke:#E7E7E7;stroke-width:0.5;"/><path d="M720.2938,652.05 L720.2938,662.05 L730.2938,662.05 L720.2938,652.05 " fill="#714137" style="stroke:#E7E7E7;stroke-width:0.5;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="107.9102" x="585.7" y="669.1169">Displays camera</text><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="129.5938" x="585.7" y="684.2497">feed and other data</text></g><g id="link_Physics Simulation_Drone Model"><path d="M125.65,194.66 C122.96,208.75 121.87,226.86 129,241.16 C139.77,262.78 155.2164,276.519 174.6364,288.609 " fill="none" id="Physics Simulation-to-Drone Model" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="179.73,291.78,174.2036,283.6277,175.4853,289.1375,169.9756,290.4192,179.73,291.78" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52.5776" x="130" y="237.2269">updates</text></g><g id="link_Drone Model_Simulated Sensors"><path d="M238.92,338.75 C247.72,353.25 260.09,372.21 273,387.46 C281.84,397.91 288.178,404.3676 297.918,413.1676 " fill="none" id="Drone Model-to-Simulated Sensors" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="302.37,417.19,298.3735,408.1884,298.66,413.838,293.0104,414.1245,302.37,417.19" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="99.0806" x="274" y="383.5269">generates data</text></g><g id="link_Simulated Sensors_ArduPilot Plugin"><path d="M357.09,417.21 C365.45,408.86 373.56,398.66 378,387.46 C404.73,319.98 405.07,291.5 378,224.16 C373.51,212.99 369.638,207.077 361.198,198.777 " fill="none" id="Simulated Sensors-to-ArduPilot Plugin" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="356.92,194.57,360.5323,203.7325,360.485,198.0758,366.1416,198.0285,356.92,194.57" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118.6631" x="399" y="319.8769">sends sensor data</text></g><g id="link_ArduPilot Plugin_Autopilot Firmware"><path d="M374.7679,197.2105 C407.1079,213.5105 448.38,231.61 492,241.16 C546.08,253.01 687.4,235.3 741,249.16 C774.71,257.88 804.5578,273.509 829.2478,288.679 " fill="none" id="ArduPilot Plugin-Autopilot Firmware" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="369.41,194.51,375.6465,202.1327,373.8749,196.7604,379.2472,194.9888,369.41,194.51" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="834.36,291.82,828.7858,283.7004,830.0999,289.2025,824.5978,290.5166,834.36,291.82" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55.6245" x="493" y="237.2269">MAVLink</text></g><g id="link_Autopilot Firmware_MAVProxy"><path d="M874.4686,344.7811 C879.5186,367.0211 884.5316,389.0889 889.5716,411.2889 " fill="none" id="Autopilot Firmware-MAVProxy" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="873.14,338.93,871.2322,348.5923,874.2472,343.8059,879.0336,346.8209,873.14,338.93" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="890.9,417.14,892.8082,407.4778,889.793,412.2641,885.0067,409.2489,890.9,417.14" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55.6245" x="884" y="383.5269">MAVLink</text></g><g id="link_ArduPilot Plugin_Drone Model"><path d="M255.48,194.65 C242.57,202 230.77,211.62 223,224.16 C210.46,244.39 212.4176,266.5584 217.2576,285.9584 " fill="none" id="ArduPilot Plugin-to-Drone Model" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="218.71,291.78,220.4125,282.0794,217.4997,286.9287,212.6504,284.0159,218.71,291.78" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="149.7285" x="224" y="237.2269">applies control outputs</text></g><g id="link_Camera_ros_gz_bridge"><path d="M517.97,194.46 C530.37,203.43 544.55,214.02 557,224.16 C584,246.16 609.0743,268.9847 628.9743,287.6547 " fill="none" id="Camera-to-ros_gz_bridge" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="633.35,291.76,629.5233,282.685,629.7036,288.339,624.0496,288.5193,633.35,291.76" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85.2617" x="577" y="237.2269">Gazebo topic</text></g><g id="link_ros_gz_bridge_ROS 2 Nodes"><path d="M609.41,338.78 C597.3,346.95 585.8,357.46 579,370.46 C569.24,389.11 579.5247,402.1079 598.9447,414.0979 " fill="none" id="ros_gz_bridge-to-ROS 2 Nodes" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="604.05,417.25,598.4934,409.1183,599.7955,414.6233,594.2906,415.9255,604.05,417.25" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76.1147" x="580" y="383.5269">ROS 2 topic</text></g><g id="link_ROS 2 Nodes_rqt"><path d="M655,464.22 C655,486.47 655,514.24 655,536.43 " fill="none" id="ROS 2 Nodes-to-rqt" style="stroke:#E7E7E7;stroke-width:1.0;"/><polygon fill="#E7E7E7" points="655,542.43,659,533.43,655,537.43,651,533.43,655,542.43" style="stroke:#E7E7E7;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76.1147" x="656" y="508.8269">ROS 2 topic</text></g><g id="link_ArduPilot Plugin_GMN25"><path d="M339.67,147.38 C356.5,116.56 390.87,64.49 438.5,46.87 C548.98,6 894.82,105.57 1038.94,150.45 " fill="none" id="ArduPilot Plugin-GMN25" style="stroke:#E7E7E7;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><g id="link_ros_gz_bridge_GMN28"><path d="M678.86,291.89 C702.03,268.94 740.96,235.45 782.5,221.66 C854.63,197.72 880.19,201.62 953.5,221.66 C1005.3,235.82 1057.37,271.73 1087.05,294.74 " fill="none" id="ros_gz_bridge-GMN28" style="stroke:#E7E7E7;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g></g></svg></div></div>
+
+<h1 id="following-the-official-ros2-ardupilot-gazebo-tutorial"><a href="../Following%20the%20official%20ROS2%20%2B%20ArduPilot%20%2B%20Gazebo%20tutorial/">Following the official ROS2 + ArduPilot + Gazebo tutorial</a><a class="headerlink" href="#following-the-official-ros2-ardupilot-gazebo-tutorial" title="Permanent link">&para;</a></h1>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+        <script src="../../assets/mkdocs_puml/puml.js"></script>
+      
+        <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+      
+        <script src="../../assets/mkdocs_puml/interaction.js"></script>
+      
+    
+  </body>
+</html>
